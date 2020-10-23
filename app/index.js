@@ -14,8 +14,7 @@ class App extends React.Component {
     // Browsers don't understand JSX. Babel will transform JSX to plain javascript e.g. using createElement().
     return (
       <div className="container">
-        {" "}
-        <Popular />{" "}
+        <Popular />
       </div>
     );
   }
