@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Popular from "./components/Popular";
+import Battle from "./components/Battle";
 
 // Component
 // State
@@ -14,7 +15,7 @@ class App extends React.Component {
     // Browsers don't understand JSX. Babel will transform JSX to plain javascript e.g. using createElement().
     return (
       <div className="container">
-        <Popular />
+        <Battle />
       </div>
     );
   }
