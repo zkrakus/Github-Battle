@@ -1,5 +1,52 @@
 const { func } = require("prop-types");
 
+const id = "YOUR_CLIENT_ID";
+const sec = "YOUR_SECRET_ID";
+const params = `?client_id=${id}&client_secret=${sec}`;
+
+function getErrorMsg(message, username) {
+  if (message === "Not Found") {
+    return `${username} doesn't exist`;
+  }
+
+  return message;
+}
+
+function getProfile(username) {
+  return fetch(`https://api.github.com/users/${username}${params}`)
+    .then((res) => res.json())
+    .then((profile) => {
+      if (profile.message) {
+        throw new Error(getErrorMsg(profile.message, username));
+      }
+
+      return profile;
+    });
+}
+
+function getRepos(username) {
+  return fetch(
+    `https://api/github.com/users/${username}/repos/${params}&per_page=100`
+  )
+    .then((rs) => res.json())
+    .then((repos) => {
+      if (repos.message) {
+        throw new Error(getErrorMsg(repos.message, username));
+      }
+
+      return repos;
+    });
+}
+
+function getUserData(player) {
+  return Promise.all([getProfile(player), getRepos(player)]).then(
+    ([profile, repo]) => ({
+      profile,
+      score: calculateScore(profile.followers, repos),
+    })
+  );
+}
+
 export function fetchPopularRepos(language) {
   const endpoint = window.encodeURI(
     `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
