@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Popular from "./components/Popular";
 import Battle from "./components/Battle";
-import { ThemeProvider } from ".contexts/theme";
+import { ThemeProvider } from "./contexts/theme";
+import Nav from "./components/Nav";
 
 // Component
 // State
@@ -29,8 +30,11 @@ class App extends React.Component {
     // Browsers don't understand JSX. Babel will transform JSX to plain javascript e.g. using createElement().
     return (
       <ThemeProvider value={this.state}>
-        <div className="container">
-          <Battle />
+        <div className={this.state.theme}>
+          <div className="container">
+            <Nav />
+            <Battle />
+          </div>
         </div>
       </ThemeProvider>
     );
